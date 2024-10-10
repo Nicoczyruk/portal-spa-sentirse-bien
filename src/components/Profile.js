@@ -65,7 +65,13 @@ const Perfil = () => {
   return (
     <div className = "flex">
         {isSidebarOpen && <Sidebar currentPage = {currentPage} /> }
-        <div className="flex-1 bg-spa-verde-claro min-h-screen p-8 flex flex-col items-center">
+        <div className="flex-1 min-h-screen p-8 flex flex-col items-center"
+        style={{
+          backgroundImage: 'url(./edicion7.png)', // Ruta de la imagen
+          backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+          backgroundPosition: 'center', // Centra la imagen
+          backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+        }}>
             <button
                 className="absolute top-4 left-4 p-2 bg-gray-800 text-white rounded hover:bg-blue-600 flex items-center z-10"
                 onClick={toggleSidebar}
@@ -76,13 +82,13 @@ const Perfil = () => {
                     <div className="h-1 w-8 bg-spa-verde-oscuro"></div>
                 </div>
             </button>
+            <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
+                Perfil de Usuario
+            </h1>
         <div className="max-w-2xl w-full">
             {/* Tarjeta de Perfil */}
             <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h1 className="text-3xl font-bold text-center text-blue-600 mb-4">
-                Perfil de Usuario
-            </h1>
-
+            
             {editando ? (
                 <form onSubmit={handleGuardar}>
                 <div>
@@ -138,7 +144,7 @@ const Perfil = () => {
                 <p><strong>Email:</strong> {email}</p>
                 <p><strong>Teléfono:</strong> {telefono}</p>
                 <p><strong>Dirección:</strong> {direccion}</p>
-                <button onClick={() => setEditando(true)} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500">
+                <button onClick={() => setEditando(true)} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500">
                     Editar Perfil
                 </button>
                 </>

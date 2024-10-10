@@ -6,42 +6,46 @@ const Sidebar = ({ currentPage }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate('/'); // Cambia esto a la ruta de logout si es necesario
+    navigate('/');
   };
 
   return (
-    <div className="bg-gray-800 text-white w-64 h-screen flex flex-col">
-      <div className="p-4 text-center text-2xl font-bold">Menú</div>
-      <nav className="flex-1">
+    <div className="bg-white text-gray-800 w-64 h-screen flex flex-col relative"> {/* Sidebar blanco */}
+      <div
+        className="absolute inset-0 bg-[rgb(237_247_222/0.8)] bg-cover"         
+      ></div>
+      <div className="p-4 text-center text-2xl font-bold z-10 relative">Menú</div> {/* Texto sobre la imagen */}
+      <nav className="flex-1 z-10 relative">
         <ul className="space-y-2 p-4">
           {currentPage !== 'inicio' && (
             <li>
-              <Link to="/home" className="block p-2 hover:bg-gray-700 rounded">
+              <Link to="/home" className="block p-2 hover:bg-gray-300 rounded">
                 Inicio
               </Link>
             </li>
           )}
           {currentPage !== 'perfil' && (
             <li>
-              <Link to="/perfil" className="block p-2 hover:bg-gray-700 rounded">
+              <Link to="/perfil" className="block p-2 hover:bg-gray-300 rounded">
                 Mi perfil
               </Link>
             </li>
           )}
-          <li>
-            <Link to="/reservas" className="block p-2 hover:bg-gray-700 rounded">
-              Reservar Servicio
-            </Link>
-          </li>
+          {currentPage !== 'reservas' && (
+            <li>
+              <Link to="/reservas" className="block p-2 hover:bg-gray-300 rounded">
+                Reservar Servicio
+              </Link>
+            </li>
+          )}
           <li>
             <button
               onClick={handleLogout}
-              className="mt-4 w-full bg-red-600 text-white p-2 rounded hover:bg-red-500"
+              className="mt-4 w-full bg-red-600 text-white p-2 rounded-full hover:bg-red-500"
             >
               Cerrar Sesión
             </button>
           </li>
-          {/* Agrega más opciones según sea necesario */}
         </ul>
       </nav>
     </div>
