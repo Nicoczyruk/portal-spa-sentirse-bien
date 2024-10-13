@@ -1,21 +1,58 @@
 // src/components/Login.js
-import React, { useState } from 'react';
+
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthContext'; // Importa el contexto
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { login } = useContext(AuthContext); // Obtiene la función login del contexto
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    alert(`Inicio de sesión exitoso con ${email}`);
-    navigate('/home');
+
+    const data = { email, password };
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include', // Importante para enviar y recibir cookies de sesión
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      console.log('response.status:', response.status);
+      console.log('response.ok:', response.ok);
+      console.log('result:', result);
+
+      if (response.ok) {
+        // Inicio de sesión exitoso
+        login(); // Actualiza el estado de autenticación
+        navigate('/home'); // Redirige al usuario
+      } else {
+        // Mostrar error
+        setError(result.error);
+      }
+    } catch (error) {
+      console.error('Error al conectar con el servidor:', error);
+      setError('Error al conectar con el servidor');
+    }
+  };
+
+  const handleRegisterRedirect = () => {
+    navigate('/register');
   };
 
   return (
-    <div className="bg-spa-verde-oscuro min-h-screen flex justify-center items-center"> {/* Cambia el color de fondo aquí */}
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto"> {/* Tarjeta de login */}
+    <div className="bg-spa-verde-oscuro min-h-screen flex justify-center items-center">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
         <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Logo del Spa" className="w-34 h-24 mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-center mb-4">Iniciar Sesión</h2>
         <form onSubmit={handleLogin}>
@@ -39,6 +76,7 @@ const Login = () => {
               required
             />
           </div>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
@@ -46,6 +84,15 @@ const Login = () => {
             Iniciar Sesión
           </button>
         </form>
+        <div className="mt-4 text-center">
+          <p>¿No tienes una cuenta?</p>
+          <button
+            onClick={handleRegisterRedirect}
+            className="mt-2 text-blue-600 hover:underline"
+          >
+            Registrarse
+          </button>
+        </div>
       </div>
     </div>
   );

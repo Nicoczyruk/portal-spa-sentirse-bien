@@ -1,6 +1,7 @@
 {
   "name": "portal-spa-sentirse-bien",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && python move_build_files.py",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
