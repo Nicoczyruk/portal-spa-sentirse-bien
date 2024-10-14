@@ -1,61 +1,44 @@
 // src/components/Home.js
+
 import React, { useState, useEffect } from 'react';
-import Sidebar from '../components/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const navigate = useNavigate();
+  
   const handleServiceSelect = (servicio) => {
     // Redirigir a la página de reservas y pasar el servicio seleccionado
     navigate('/reservas', { state: { servicio } });
   };
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const [currentPage, setCurrentPage] = useState('inicio');
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
 
   useEffect(() =>{
     setCurrentPage('inicio');
   }, []);
 
   return (
-    <div className="flex">
-      {isSidebarOpen && <Sidebar currentPage = {currentPage}/>} {/* Renderiza la sidebar solo si isSidebarOpen es true */}
-      {/* Contenedor principal con fondo de imagen */}
-      <div
-        className="flex-1 min-h-screen p-8 flex flex-col items-center"
-        style={{
-          backgroundImage: 'url(./edicion7.png)', // Ruta de la imagen
-          backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
-          backgroundPosition: 'center', // Centra la imagen
-          backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
-        }}
-      >   
-        {/* Botón hamburguesa en la parte superior izquierda */}
-        <button
-          className="absolute top-4 left-4 p-2 bg-gray-800 text-white rounded hover:bg-blue-600 flex items-center z-10"
-          onClick={toggleSidebar} // Agrega el evento de clic al botón
-        >
-          <div className="flex flex-col space-y-1">
-            <div className="h-1 w-8 bg-spa-verde-oscuro"></div>
-            <div className="h-1 w-8 bg-spa-verde-oscuro"></div>
-            <div className="h-1 w-8 bg-spa-verde-oscuro"></div>
-          </div>
-        </button>
-        
-        <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
-          Bienvenido al Portal del Spa Sentirse Bien
-        </h1>
+    <div
+      className="flex-1 min-h-screen p-8 flex flex-col items-center"
+      style={{
+        backgroundImage: 'url(./edicion7.png)', // Ruta de la imagen
+        backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+        backgroundPosition: 'center', // Centra la imagen
+        backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+      }}
+    >   
+      <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
+        Bienvenido al Portal del Spa Sentirse Bien
+      </h1>
 
-        <img
-          src="./logo.png"
-          alt="Logo del Spa"
-          style={{ width: '300px', height: '200px' }}
-          className="mb-4"
-        />
+      <img
+        src="./logo.png"
+        alt="Logo del Spa"
+        style={{ width: '300px', height: '200px' }}
+        className="mb-4"
+      />
 
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
         {/* Tarjeta 1: Masaje Relajante */}
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h2 className="text-2xl font-semibold text-purple-700 mb-4">Masaje Relajante</h2>
@@ -98,7 +81,6 @@ const Home = () => {
           </button>
         </div>
       </div>
-    </div>
     </div>
   );
 };

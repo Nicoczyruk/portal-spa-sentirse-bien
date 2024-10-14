@@ -34,8 +34,19 @@ const Login = () => {
 
       if (response.ok) {
         // Inicio de sesión exitoso
-        login(); // Actualiza el estado de autenticación
-        navigate('/home'); // Redirige al usuario
+        // Obtener la información del usuario
+        const resMe = await fetch('/api/auth/me', {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (resMe.ok) {
+          const dataMe = await resMe.json();
+          login(dataMe.user); // Actualiza el estado de autenticación con la información del usuario
+          navigate('/home'); // Redirige al usuario
+        } else {
+          setError('Error al obtener la información del usuario.');
+        }
       } else {
         // Mostrar error
         setError(result.error);
