@@ -1,7 +1,7 @@
 // src/App.js
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Login from './components/Login';
 import Home from './components/Home';
 import Profile from './components/Profile';
@@ -12,6 +12,8 @@ import AdminHome from './components/AdminHome';
 import Sidebar from './components/Sidebar';
 import { AuthProvider, AuthContext } from './AuthContext'; 
 import PrivateRoute from './components/PrivateRoute'; 
+import Pagos from './components/Pagos';
+import Informes from './components/Informes'; 
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
           {({ isAuthenticated }) => (
             <div className="flex">
               {/* Renderizar Sidebar solo si el usuario está autenticado */}
-              {isAuthenticated && <Sidebar />}
+              {isAuthenticated && useLocation.pathname !== '/' && <Sidebar />}
 
               {/* Contenedor principal para las rutas */}
               <div className="flex-1">
@@ -35,7 +37,9 @@ function App() {
                   <Route path="/perfil" element={<PrivateRoute element={Profile} />} />
                   <Route path="/reservar-servicio" element={<PrivateRoute element={ReservaServicio} />} />
                   <Route path="/historial-reservas" element={<PrivateRoute element={HistorialReservas} />} />
-
+                  <Route path="/pagos" element={<Pagos />} />
+                  <Route path="/informes" element={<Informes />} />
+                  
                   {/* Ruta protegida para AdminHome */}
                   <Route path="/admin" element={<PrivateRoute element={AdminHome} roles={['admin']} />} />
                 </Routes>

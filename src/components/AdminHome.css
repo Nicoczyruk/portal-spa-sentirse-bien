@@ -1,36 +1,197 @@
 /* src/components/AdminHome.css */
 
-.admin-home {
-    padding: 20px;
-  }
+/* Elimina o comenta la regla incorrecta */
+/*
+.bg-[rgba(237,247,222,0.8)] {
+  background-color: rgba(237, 247, 222, 0.8);
+}
+*/
+
+/* Agrega una clase personalizada válida */
+.bg-custom-opacity {
+  background-color: rgba(237, 247, 222, 0.8);
+}
+
+/* Elimina 'background-opacity' si existe y usa 'rgba' en su lugar */
+.some-class {
+  /* Reemplaza esto:
+  background-color: #fff;
+  background-opacity: 0.5;
   
-  .admin-home h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .admin-home section {
-    margin-bottom: 30px;
-  }
-  
-  .admin-home table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .admin-home th, .admin-home td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .admin-home th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
-  
-  .error {
+  Por esto: */
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Resto de tus estilos permanecen igual */
+.error {
     color: red;
     text-align: center;
     margin-bottom: 20px;
-  }
-  
+}
+
+/* Estilos para las tablas con scroll */
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.max-h-96 {
+    max-height: 24rem; /* Aproximadamente 10 filas */
+}
+
+/* Estilos para modales */
+.fixed {
+    position: fixed;
+}
+.inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.flex {
+    display: flex;
+}
+.items-center {
+    align-items: center;
+}
+.justify-center {
+    justify-content: center;
+}
+.bg-black {
+    background-color: black;
+}
+.bg-opacity-50 {
+    background-opacity: 0.5; /* Elimina o reemplaza esta propiedad */
+}
+.bg-white {
+    background-color: white;
+}
+.p-6 {
+    padding: 1.5rem;
+}
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+.w-96 {
+    width: 24rem;
+}
+.max-h-full {
+    max-height: 100%;
+}
+.mb-4 {
+    margin-bottom: 1rem;
+}
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+.bg-blue-500 {
+    background-color: #4299e1;
+}
+.bg-blue-700 {
+    background-color: #2b6cb0;
+}
+.bg-red-500 {
+    background-color: #f56565;
+}
+.bg-red-700 {
+    background-color: #c53030;
+}
+.bg-green-500 {
+    background-color: #48bb78;
+}
+.bg-green-700 {
+    background-color: #2f855a;
+}
+.bg-yellow-500 {
+    background-color: #ecc94b;
+}
+.bg-yellow-700 {
+    background-color: #d69e2e;
+}
+.bg-gray-300 {
+    background-color: #e2e8f0;
+}
+.bg-gray-400 {
+    background-color: #cbd5e0;
+}
+.text-white {
+    color: white;
+}
+.text-gray-800 {
+    color: #2d3748;
+}
+.font-bold {
+    font-weight: bold;
+}
+.py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+.px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+.rounded {
+    border-radius: 0.25rem;
+}
+.hover\:bg-blue-700:hover {
+    background-color: #2b6cb0;
+}
+.hover\:bg-red-700:hover {
+    background-color: #c53030;
+}
+.hover\:bg-green-700:hover {
+    background-color: #2f855a;
+}
+.hover\:bg-yellow-700:hover {
+    background-color: #d69e2e;
+}
+.hover\:bg-gray-400:hover {
+    background-color: #cbd5e0;
+}
+.hover\:bg-gray-300:hover {
+    background-color: #e2e8f0;
+}
+.text-center {
+    text-align: center;
+}
+.space-x-4 > * + * {
+    margin-left: 1rem;
+}
+.flex-1 {
+    flex: 1;
+}
+.min-h-screen {
+    min-height: 100vh;
+}
+.p-8 {
+    padding: 2rem;
+}
+.flex-col {
+    flex-direction: column;
+}
+.items-center {
+    align-items: center;
+}
+.bg-custom-opacity { /* Nueva clase */
+    background-color: rgba(237, 247, 222, 0.8);
+}
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+                0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+.rounded-full {
+    border-radius: 9999px;
+}

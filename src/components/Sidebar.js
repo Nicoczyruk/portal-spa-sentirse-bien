@@ -2,26 +2,26 @@
 
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { AuthContext } from '../AuthContext'; // Importa AuthContext
+import { AuthContext } from '../AuthContext';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { logout, user } = useContext(AuthContext); // Obtiene el usuario y logout del contexto
-  const [isOpen, setIsOpen] = useState(true); // Estado para manejar la visibilidad de la Sidebar
+  const { logout, user } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleLogout = async () => {
     try {
       const response = await fetch('/api/auth/logout', {
         method: 'POST',
-        credentials: 'include', // Importante para enviar cookies de sesión
+        credentials: 'include',
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        logout(); // Actualiza el estado de autenticación en el frontend
-        navigate('/'); // Redirige al inicio de sesión
+        logout();
+        navigate('/');
       } else {
         console.error('Error al cerrar sesión:', result.error);
       }
@@ -37,11 +37,13 @@ const Sidebar = () => {
   if (path === '/perfil') currentPage = 'perfil';
   if (path === '/reservar-servicio') currentPage = 'reservar-servicio';
   if (path === '/historial-reservas') currentPage = 'historial-reservas';
+  if (path === '/pagos') currentPage = 'pagos'; 
   if (path === '/admin') currentPage = 'admin';
+  if (path === '/informes') currentPage = 'informes';
 
   return (
     <>
-      {/* Botón de Toggling (Hamburger Menu) */}
+      {/* Botón de menú hamburguesa */}
       <button
         className="fixed top-4 left-4 p-2 bg-gray-800 text-white rounded hover:bg-blue-600 flex items-center z-50"
         onClick={() => setIsOpen(!isOpen)}
@@ -70,7 +72,7 @@ const Sidebar = () => {
         {/* Enlaces de navegación */}
         <nav className="flex-1 p-4 z-10 relative">
           <ul className="space-y-2">
-            {/* Mostrar el enlace al panel admin solo si el rol es 'admin' */}
+            {/* Enlace al panel admin solo si el usuario es admin */}
             {user && user.rol === 'admin' && (
               <li>
                 <Link
@@ -78,7 +80,7 @@ const Sidebar = () => {
                   className={`block p-2 hover:bg-gray-300 rounded ${
                     currentPage === 'admin' ? 'bg-gray-300' : ''
                   }`}
-                  onClick={() => setIsOpen(false)} // Cerrar Sidebar al hacer clic
+                  onClick={() => setIsOpen(false)}
                 >
                   Panel Admin
                 </Link>
@@ -141,10 +143,43 @@ const Sidebar = () => {
               </li>
             )}
 
+            {/* Agregar enlace a Pagos */}
+            {currentPage !== 'pagos' && (
+              <li>
+                <Link
+                  to="/pagos"
+                  className={`block p-2 hover:bg-gray-300 rounded ${
+                    currentPage === 'pagos' ? 'bg-gray-300' : ''
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Pagos
+                </Link>
+              </li>
+            )}
+
+            {/* Agregar enlace a Informes */}
+            {currentPage !== 'informes' && (
+              <li>
+                <Link
+                  to="/informes"
+                  className={`block p-2 hover:bg-gray-300 rounded ${
+                    currentPage === 'informes' ? 'bg-gray-300' : ''
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Informes
+                </Link>
+              </li>
+            )}
+
             {/* Botón de Cerrar Sesión */}
             <li>
               <button
-                onClick={() => { handleLogout(); setIsOpen(false); }}
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
                 className="mt-4 w-full bg-red-600 text-white p-2 rounded-full hover:bg-red-500"
               >
                 Cerrar Sesión
