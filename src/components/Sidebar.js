@@ -30,7 +30,6 @@ const Sidebar = () => {
     }
   };
 
-  // Determinar currentPage basado en la ruta actual
   const path = location.pathname;
   let currentPage = '';
   if (path === '/home') currentPage = 'inicio';
@@ -40,6 +39,8 @@ const Sidebar = () => {
   if (path === '/pagos') currentPage = 'pagos'; 
   if (path === '/admin') currentPage = 'admin';
   if (path === '/informes') currentPage = 'informes';
+  if (path === '/empleado/pagos') currentPage = 'panel-empleado';
+  if (path === '/panelprofesional') currentPage = 'panel-profesional'; // Nueva ruta
 
   return (
     <>
@@ -143,7 +144,7 @@ const Sidebar = () => {
               </li>
             )}
 
-            {/* Agregar enlace a Pagos */}
+            {/* Enlace a Pagos */}
             {currentPage !== 'pagos' && (
               <li>
                 <Link
@@ -158,7 +159,7 @@ const Sidebar = () => {
               </li>
             )}
 
-            {/* Agregar enlace a Informes */}
+            {/* Enlace a Informes */}
             {currentPage !== 'informes' && (
               <li>
                 <Link
@@ -172,6 +173,32 @@ const Sidebar = () => {
                 </Link>
               </li>
             )}
+
+            {/* Nuevo botón: Panel Empleado */}
+            <li>
+              <Link
+                to="/panelempleado"
+                className={`block p-2 hover:bg-gray-300 rounded ${
+                  currentPage === 'panel-empleado' ? 'bg-gray-300' : ''
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Panel Empleado
+              </Link>
+            </li>
+
+            {/* Nuevo botón: Panel Profesional */}
+            <li>
+              <Link
+                to="/panelprofesional"
+                className={`block p-2 hover:bg-gray-300 rounded ${
+                  currentPage === 'panel-profesional' ? 'bg-gray-300' : ''
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Panel Profesional
+              </Link>
+            </li>
 
             {/* Botón de Cerrar Sesión */}
             <li>

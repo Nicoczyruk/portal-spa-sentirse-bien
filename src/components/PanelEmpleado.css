@@ -1,0 +1,44 @@
+
+/* src/components/PanelEmpleado.css */
+
+.panel-empleado {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #333;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .pagos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+  }
+  
+  .pagos-table th, .pagos-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .pagos-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .total-ingresos {
+    font-size: 1.5rem;
+    text-align: right;
+  }
+  

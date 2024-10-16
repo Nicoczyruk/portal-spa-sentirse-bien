@@ -14,6 +14,9 @@ import { AuthProvider, AuthContext } from './AuthContext';
 import PrivateRoute from './components/PrivateRoute'; 
 import Pagos from './components/Pagos';
 import Informes from './components/Informes'; 
+import PanelEmpleado from './components/PanelEmpleado';
+import PanelProfesional from './components/PanelProfesional';
+
 
 function App() {
   return (
@@ -33,13 +36,16 @@ function App() {
                   <Route path="/register" element={<Register />} />
 
                   {/* Rutas protegidas */}
-                  <Route path="/home" element={<PrivateRoute element={Home} />} />
-                  <Route path="/perfil" element={<PrivateRoute element={Profile} />} />
-                  <Route path="/reservar-servicio" element={<PrivateRoute element={ReservaServicio} />} />
-                  <Route path="/historial-reservas" element={<PrivateRoute element={HistorialReservas} />} />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/perfil" element={<Profile />} />
+                  <Route path="/reservar-servicio" element={<ReservaServicio />} />
+                  <Route path="/historial-reservas" element={<HistorialReservas />} />
                   <Route path="/pagos" element={<Pagos />} />
                   <Route path="/informes" element={<Informes />} />
-                  
+                  <Route path="/panelempleado" element={<PanelEmpleado />} />
+                  <Route path="/panelprofesional" element={<PanelProfesional />} />
+
+
                   {/* Ruta protegida para AdminHome */}
                   <Route path="/admin" element={<PrivateRoute element={AdminHome} roles={['admin']} />} />
                 </Routes>
