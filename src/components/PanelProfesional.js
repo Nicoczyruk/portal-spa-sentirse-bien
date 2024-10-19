@@ -42,7 +42,7 @@ const PanelProfesional = () => {
     }}
     >
       <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
-        Panel Profecional
+        Panel Profesional
       </h1>
 
       <div className="mb-6">
