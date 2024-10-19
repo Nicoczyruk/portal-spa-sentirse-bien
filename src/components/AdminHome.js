@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
-import './AdminHome.css'; 
+import './AdminHome.css';
 
 const AdminHome = () => {
   const { isAuthenticated, user } = useContext(AuthContext);
@@ -305,7 +305,7 @@ const AdminHome = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
       }}
-    >   
+    >
       <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-custom-opacity">
         Panel de Administración
       </h1>
@@ -343,7 +343,7 @@ const AdminHome = () => {
       {/* Modales */}
       {/* Agregar Profesional */}
       {isAddProfesionalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed-inset-0">
           <div className="bg-white p-6 rounded-lg w-96">
             <h2 className="text-xl font-semibold mb-4">Agregar Profesional</h2>
             <form onSubmit={handleAddProfesionalSubmit}>
@@ -428,9 +428,10 @@ const AdminHome = () => {
         </div>
       )}
 
+
       {/* Eliminar Profesional */}
       {isRemoveProfesionalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed-inset-0">
           <div className="bg-white p-6 rounded-lg w-96 max-h-full overflow-y-auto">
             <h2 className="text-xl font-semibold mb-4">Eliminar Profesional</h2>
             <ul>
@@ -459,9 +460,10 @@ const AdminHome = () => {
         </div>
       )}
 
+
       {/* Agregar Empleado */}
       {isAddEmpleadoOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed-inset-0">
           <div className="bg-white p-6 rounded-lg w-96">
             <h2 className="text-xl font-semibold mb-4">Agregar Empleado</h2>
             <form onSubmit={handleAddEmpleadoSubmit}>
@@ -547,10 +549,11 @@ const AdminHome = () => {
         </div>
       )}
 
+
       {/* Eliminar Empleado */}
       {isRemoveEmpleadoOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg w-96 max-h-full overflow-y-auto">
+        <div className="fixed inset-0 flex items-center justify-center" style={{ backdropFilter: 'blur(5px)', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 50 }}>
+          <div className="bg-white p-6 rounded-lg w-96 max-h-full overflow-y-auto" style={{ zIndex: 60 }}>
             <h2 className="text-xl font-semibold mb-4">Eliminar Empleado</h2>
             <ul>
               {empleados.length === 0 && <p>No hay empleados para eliminar.</p>}
@@ -577,6 +580,8 @@ const AdminHome = () => {
           </div>
         </div>
       )}
+
+
 
       <div className="admin-section w-full mb-12">
         {/* Listado de Clientes */}
@@ -705,37 +710,6 @@ const AdminHome = () => {
           </table>
         </div>
       </div>
-
-      {/* Modal Eliminar Empleado */}
-      {isRemoveEmpleadoOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg w-96 max-h-full overflow-y-auto">
-            <h2 className="text-xl font-semibold mb-4">Eliminar Empleado</h2>
-            <ul>
-              {empleados.length === 0 && <p>No hay empleados para eliminar.</p>}
-              {empleados.map(empleado => (
-                <li key={empleado.id_cliente} className="flex justify-between items-center mb-2">
-                  <span>{empleado.nombre} {empleado.apellido}</span>
-                  <button
-                    onClick={() => handleRemoveEmpleado(empleado.id_cliente)}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-                  >
-                    Eliminar
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <div className="flex justify-end mt-4">
-              <button
-                onClick={() => setIsRemoveEmpleadoOpen(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
