@@ -47,10 +47,10 @@ const HistorialReservas = () => {
       {/* Contenedor principal para la página de historial */}
       <div className="flex-1 min-h-screen p-8 flex flex-col items-center"
         style={{
-          backgroundImage: 'url(./edicion7.png)', // Ruta de la imagen
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+          backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+          backgroundPosition: 'center', // Centra la imagen
+          backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
         }}
       > 
         <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
@@ -59,15 +59,15 @@ const HistorialReservas = () => {
 
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
-        <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-          <table className="min-w-full bg-white border">
+        <div className="overflow-x-auto bg-[rgba(237,247,222,0.8)] shadow-md rounded-lg">
+          <table className="min-w-full bg-[rgba(237,247,222,0.8)] border">
             <thead>
-              <tr className="bg-gray-200 text-center">
-                <th className="py-2 px-4 border-b">ID Turno</th>
-                <th className="py-2 px-4 border-b">Fecha</th>
-                <th className="py-2 px-4 border-b">Hora</th>
-                <th className="py-2 px-4 border-b">Estado</th>
-                <th className="py-2 px-4 border-b">Pago</th>
+              <tr className="bg-[rgba(76,175,80,0.8)] text-center">
+                <th className="py-2 px-4 border-b text-white">ID Turno</th>
+                <th className="py-2 px-4 border-b text-white">Fecha</th>
+                <th className="py-2 px-4 border-b text-white">Hora</th>
+                <th className="py-2 px-4 border-b text-white">Estado</th>
+                <th className="py-2 px-4 border-b text-white">Pago</th>
               </tr>
             </thead>
             <tbody className="text-center">

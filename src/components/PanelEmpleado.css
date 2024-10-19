@@ -2,16 +2,24 @@
 /* src/components/PanelEmpleado.css */
 
 .panel-empleado {
-    padding: 2rem;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
   
   .title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #333;
+    font-size: 2.25rem !important;  /* Equivale a text-4xl */
+    font-weight: 600 !important; /* Equivale a font-semibold */
+    text-align: center !important;
+    color: #000 !important; /* Equivale a text-black */
+    margin-bottom: 2rem !important; /* Equivale a mb-8 */
+    padding: 1rem !important; /* Equivale a p-4 */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1) !important; /* Equivale a shadow-lg */
+    border-radius: 9999px !important; /* Equivale a rounded-full */
+    background-color: rgba(237, 247, 222, 0.8) !important;
   }
   
   .error {
@@ -24,6 +32,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 2rem;
+    background-color: #E7F5D6
   }
   
   .pagos-table th, .pagos-table td {
