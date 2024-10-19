@@ -38,16 +38,14 @@ function App() {
                   {/* Rutas protegidas */}
                   <Route path="/home" element={<Home />} />
                   <Route path="/perfil" element={<Profile />} />
-                  <Route path="/reservar-servicio" element={<ReservaServicio />} />
-                  <Route path="/historial-reservas" element={<HistorialReservas />} />
-                  <Route path="/pagos" element={<Pagos />} />
-                  <Route path="/informes" element={<Informes />} />
-                  <Route path="/panelempleado" element={<PanelEmpleado />} />
-                  <Route path="/panelprofesional" element={<PanelProfesional />} />
-
-
                   {/* Ruta protegida para AdminHome */}
                   <Route path="/admin" element={<PrivateRoute element={AdminHome} roles={['admin']} />} />
+                  <Route path="/reservar-servicio" element={<PrivateRoute element={ReservaServicio} roles={['Cliente']} />} />
+                  <Route path="/historial-reservas" element={<PrivateRoute element={HistorialReservas} roles={['Cliente']} />} />
+                  <Route path="/pagos" element={<PrivateRoute element={Pagos} roles={['Cliente']} />} />
+                  <Route path="/informes" element={<PrivateRoute element={Informes} roles={['admin', 'Empleado']} />} />
+                  <Route path="/panelempleado" element={<PrivateRoute element={PanelEmpleado} roles={['admin', 'Empleado']} />} />
+                  <Route path="/panelprofesional" element={<PrivateRoute element={PanelProfesional} roles={['Profesional']} />} />
                 </Routes>
               </div>
             </div>

@@ -226,7 +226,7 @@ const Perfil = () => {
                 <div key={index} className="bg-gray-200 rounded-lg shadow p-4">
                   <h3 className="text-xl font-semibold">{reserva.servicio}</h3>
                   <p>
-                    <strong>Fecha y Hora:</strong> {reserva.fecha} {reserva.hora}
+                    <strong>Fecha y Hora:</strong> {reserva.fecha} {reserva.hora.replace(/:\d{2}$/, '')}
                   </p>
                   <p>
                     <strong>Estado:</strong> {reserva.estado}
