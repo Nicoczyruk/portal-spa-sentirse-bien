@@ -1,6 +1,7 @@
 // src/components/Pagos.js
 
 import React, { useState, useEffect } from 'react';
+import './pagos.css';
 
 const Pagos = () => {
   const [pagosPendientes, setPagosPendientes] = useState([]);
@@ -179,7 +180,14 @@ const Pagos = () => {
 
   return (
     <div className="flex">
-      <div className="flex-1 min-h-screen p-8 flex flex-col items-center bg-gray-50">
+      <div className="flex-1 min-h-screen p-8 flex flex-col items-center bg-gray-50"
+      style={{
+        backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+        backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+        backgroundPosition: 'center', // Centra la imagen
+        backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+      }}
+      >
         <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
           Pagos
         </h1>
@@ -193,7 +201,7 @@ const Pagos = () => {
             <h2 className="text-2xl font-semibold">Pagos Pendientes</h2>
             {pagosPendientes.length > 0 && (
               <button
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg"
+                className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500"
                 onClick={() => {
                   setSelectedPago('todos');
                   setModalVisible(true);
@@ -205,14 +213,14 @@ const Pagos = () => {
           </div>
           <ul>
             {pagosPendientes.map((pago) => (
-              <li key={pago.id_pago} className="mb-4 p-6 bg-white shadow rounded-lg flex justify-between items-center">
+              <li key={pago.id_pago} className="mb-4 p-6 bg-[rgba(237,247,222,0.8)] shadow rounded-lg flex justify-between items-center">
                 <div>
                   <p className="font-medium">Servicio: {pago.servicio}</p>
                   <p>Fecha: {pago.fecha} - Hora: {pago.hora}</p>
                   <p>Monto: ${!isNaN(parseFloat(pago.monto)) ? parseFloat(pago.monto).toFixed(2) : 'N/A'}</p>
                 </div>
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500"
                   onClick={() => handlePagar(pago)}
                 >
                   Pagar
@@ -230,7 +238,7 @@ const Pagos = () => {
           <h2 className="text-2xl font-semibold mb-4">Pagos Realizados</h2>
           <ul>
             {pagosRealizados.map((pago) => (
-              <li key={pago.id_factura} className="mb-4 p-6 bg-gray-100 shadow rounded-lg flex justify-between items-center">
+              <li key={pago.id_factura} className="mb-4 p-6 bg-[rgba(237,247,222,0.8)] shadow rounded-lg flex justify-between items-center">
                 <div>
                   <p className="font-medium">Servicio: {pago.servicio}</p>
                   <p>Fecha: {pago.fecha} - Hora: {pago.hora}</p>
@@ -240,7 +248,7 @@ const Pagos = () => {
                   ) : null}
                 </div>
                 <button
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg"
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
                   onClick={() => handleDescargarFactura(pago.id_factura)}
                 >
                   Descargar Factura
@@ -252,17 +260,17 @@ const Pagos = () => {
 
         {/* Modal de pago */}
         {modalVisible && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-              <h2 className="text-2xl font-bold mb-6 text-center">Detalles del Pago</h2>
-
+          <div className="fixed-inset-0">
+            <div className="bg-[rgba(237,247,222,0.8)] p-6 rounded-lg w-96">
+              <h2 className="text-xl font-semibold mb-4">Detalles del Pago</h2>
+              
               <div className="space-y-4">
                 <label className="block">
                   <span className="text-gray-700">Tipo de tarjeta</span>
                   <select
                     value={tarjeta.tipo}
                     onChange={(e) => setTarjeta({ ...tarjeta, tipo: e.target.value })}
-                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    className="w-full p-2 mb-2 border rounded"
                   >
                     <option value="credito">Tarjeta de Crédito</option>
                     <option value="debito">Tarjeta de Débito</option>
@@ -272,49 +280,78 @@ const Pagos = () => {
                 <label className="block">
                   <span className="text-gray-700">Número de tarjeta</span>
                   <input
-                    type="text"
-                    value={tarjeta.numero}
-                    onChange={(e) => setTarjeta({ ...tarjeta, numero: e.target.value })}
-                    className="block w-full mt-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                    placeholder="1234 5678 9012 3456"
-                    maxLength="19" // 16 dígitos + 3 espacios opcionales
-                  />
-                </label>
+                  type="text"
+                  value={tarjeta.numero}
+                  onChange={(e) => setTarjeta({ ...tarjeta, numero: e.target.value.replace(/[^0-9]/g, '') })} // Elimina cualquier letra ingresada
+                  className="w-full p-2 mb-2 border rounded"
+                placeholder="1234 5678 9012 3456"
+                maxLength="19" // 16 dígitos + 3 espacios opcionales
+                inputMode="numeric" // Muestra el teclado numérico en dispositivos móviles
+                pattern="\d*" // Restringe a números solamente
+                />
+              </label>
 
                 <label className="block">
                   <span className="text-gray-700">Nombre en la tarjeta</span>
                   <input
                     type="text"
                     value={tarjeta.nombre}
-                    onChange={(e) => setTarjeta({ ...tarjeta, nombre: e.target.value })}
-                    className="block w-full mt-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    onChange={(e) => setTarjeta({ ...tarjeta, nombre: e.target.value.replace(/[^a-zA-Z\s]/g, '') })} // Elimina cualquier carácter que no sea una letra
+                    className="w-full p-2 mb-2 border rounded"
                     placeholder="Nombre completo"
                   />
                 </label>
 
                 <div className="flex space-x-4">
-                  <label className="block flex-1">
-                    <span className="text-gray-700">Fecha de vencimiento</span>
-                    <input
-                      type="text"
-                      value={tarjeta.vencimiento}
-                      onChange={(e) => setTarjeta({ ...tarjeta, vencimiento: e.target.value })}
-                      className="block w-full mt-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                      placeholder="MM/AA"
-                      maxLength="5"
-                    />
+                <label className="block flex-1">
+                  <span className="text-gray-700">Fecha de vencimiento</span>
+                  <input
+                    type="text"
+                    value={tarjeta.vencimiento}
+                    onChange={(e) => {
+                    // Elimina cualquier carácter que no sea número
+                    let value = e.target.value.replace(/[^0-9]/g, '');
+
+                    // Limita el valor a 4 caracteres
+                    if (value.length > 4) {
+                    value = value.substring(0, 4);
+                    }
+
+                    // Formatea el valor con '/' cada dos dígitos
+                    if (value.length >= 3) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                    }
+
+                    setTarjeta({ ...tarjeta, vencimiento: value });
+                    }}
+                className="w-full p-2 mb-2 border rounded"
+                placeholder="MM/AA"
+                maxLength="5" // Máximo 5 caracteres (2 para mes, 1 para '/', 2 para año)
+                inputMode="numeric" // Muestra el teclado numérico en dispositivos móviles
+                />
                   </label>
                   <label className="block flex-1">
                     <span className="text-gray-700">CVC</span>
                     <input
-                      type="text"
-                      value={tarjeta.cvc}
-                      onChange={(e) => setTarjeta({ ...tarjeta, cvc: e.target.value })}
-                      className="block w-full mt-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                      placeholder="123"
-                      maxLength="4"
-                    />
-                  </label>
+                    type="text"
+                    value={tarjeta.cvc}
+                    onChange={(e) => {
+                    // Elimina cualquier carácter que no sea número
+                    let value = e.target.value.replace(/[^0-9]/g, '');
+
+                    // Limita el valor a 3 dígitos
+                    if (value.length > 3) {
+                    value = value.substring(0, 3);
+                    }
+
+                    setTarjeta({ ...tarjeta, cvc: value });
+                    }}
+                className="w-full p-2 mb-2 border rounded"
+                placeholder="123"
+                maxLength="3" // Máximo 3 caracteres
+                inputMode="numeric" // Muestra el teclado numérico en dispositivos móviles
+                />
+                </label>
                 </div>
 
                 {/* Mostrar el total pendiente si se está pagando todos */}
@@ -323,14 +360,14 @@ const Pagos = () => {
                 ) : null}
 
                 <button
-                  className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg w-full"
+                  className="mt-4 ml-4 px-4 py-2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-500"
                   onClick={selectedPago === 'todos' ? handlePagarTodos : handleConfirmarPago}
                 >
                   {selectedPago === 'todos' ? 'Confirmar Pago de Todos' : 'Confirmar Pago'}
                 </button>
 
                 <button
-                  className="text-gray-500 mt-4 w-full"
+                  className="mt-4 ml-4 px-4 py-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-500"
                   onClick={() => setModalVisible(false)}
                 >
                   Cancelar

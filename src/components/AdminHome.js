@@ -298,12 +298,13 @@ const AdminHome = () => {
 
   return (
     <div
-      className="flex-1 min-h-screen p-8 flex flex-col items-center"
-      style={{
-        backgroundImage: 'url(./edicion7.png)', // Mismo fondo que en Home.js
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+    className="panel-admin"
+    style={{
+      backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+      backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+      backgroundPosition: 'center', // Centra la imagen
+      backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+      backgroundAttachment: 'fixed',
       }}
     >
       <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-custom-opacity">
@@ -316,25 +317,25 @@ const AdminHome = () => {
       <div className="mb-8 flex space-x-4">
         <button
           onClick={() => setIsAddProfesionalOpen(true)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
         >
           Agregar Profesional
         </button>
         <button
           onClick={() => setIsRemoveProfesionalOpen(true)}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
         >
           Eliminar Profesional
         </button>
         <button
           onClick={() => setIsAddEmpleadoOpen(true)}
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
         >
           Agregar Empleado
         </button>
         <button
           onClick={() => setIsRemoveEmpleadoOpen(true)}
-          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full"
         >
           Eliminar Empleado
         </button>
@@ -412,13 +413,13 @@ const AdminHome = () => {
                 <button
                   type="button"
                   onClick={() => setIsAddProfesionalOpen(false)}
-                  className="mr-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded"
+                  className="mt-4 ml-4 px-4 py-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-500"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded"
+                  className="mt-4 ml-4 px-4 py-2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-500"
                 >
                   Agregar
                 </button>
@@ -441,7 +442,7 @@ const AdminHome = () => {
                   <span>{profesional.nombre} {profesional.apellido}</span>
                   <button
                     onClick={() => handleRemoveProfesional(profesional.id_profesional)}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                    className="mt-4 ml-4 px-4 py-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-500"
                   >
                     Eliminar
                   </button>
@@ -451,7 +452,7 @@ const AdminHome = () => {
             <div className="flex justify-end mt-4">
               <button
                 onClick={() => setIsRemoveProfesionalOpen(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded"
+                className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500"
               >
                 Cerrar
               </button>
@@ -533,13 +534,13 @@ const AdminHome = () => {
                 <button
                   type="button"
                   onClick={() => setIsAddEmpleadoOpen(false)}
-                  className="mr-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded"
+                  className="mt-4 ml-4 px-4 py-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-500"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded"
+                  className="mt-4 ml-4 px-4 py-2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-500"
                 >
                   Agregar
                 </button>
@@ -562,7 +563,7 @@ const AdminHome = () => {
                   <span>{empleado.nombre} {empleado.apellido}</span>
                   <button
                     onClick={() => handleRemoveEmpleado(empleado.id_cliente)}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                    className="mt-4 ml-4 px-4 py-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-500"
                   >
                     Eliminar
                   </button>
@@ -572,7 +573,7 @@ const AdminHome = () => {
             <div className="flex justify-end mt-4">
               <button
                 onClick={() => setIsRemoveEmpleadoOpen(false)}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded"
+                className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500"
               >
                 Cerrar
               </button>
@@ -583,13 +584,14 @@ const AdminHome = () => {
 
 
 
-      <div className="admin-section w-full mb-12">
+      
+<div className="admin-section w-full mb-12">
         {/* Listado de Clientes */}
-        <h2 className="text-2xl font-semibold text-purple-700 mb-4">Listado de Clientes</h2>
+        <h2 className="text-2xl font-semibold text-black mb-4">Listado de Clientes</h2>
         <div className="overflow-y-auto max-h-96 bg-white shadow-md rounded-lg">
           <table className="min-w-full bg-white border">
             <thead>
-              <tr className="bg-purple-200 text-center">
+              <tr className="bg-[rgba(107,189,108,0.8)] text-center text-white">
                 <th className="py-2 px-4 border-b">ID</th>
                 <th className="py-2 px-4 border-b">Nombre</th>
                 <th className="py-2 px-4 border-b">Apellido</th>
@@ -618,7 +620,7 @@ const AdminHome = () => {
 
       <div className="admin-section w-full mb-12">
         {/* Clientes Hoy */}
-        <h2 className="text-2xl font-semibold text-green-700 mb-4">Clientes Hoy</h2>
+        <h2 className="text-2xl font-semibold text-black mb-4">Clientes Hoy</h2>
         <div className="mb-4 w-full max-w-md">
           <label className="block mb-2 font-medium text-gray-700">Seleccionar Fecha:</label>
           <input
@@ -631,7 +633,7 @@ const AdminHome = () => {
         <div className="overflow-y-auto max-h-96 bg-white shadow-md rounded-lg">
           <table className="min-w-full bg-white border">
             <thead>
-              <tr className="bg-green-200 text-center">
+              <tr className="bg-[rgba(107,189,108,0.8)] text-center text-white">
                 <th className="py-2 px-4 border-b">Fecha</th>
                 <th className="py-2 px-4 border-b">Hora</th>
                 <th className="py-2 px-4 border-b">Servicio</th>
@@ -656,7 +658,7 @@ const AdminHome = () => {
 
       <div className="admin-section w-full mb-12">
         {/* Clientes por Profesional */}
-        <h2 className="text-2xl font-semibold text-red-700 mb-4">Clientes por Profesional</h2>
+        <h2 className="text-2xl font-semibold text-black mb-4">Clientes por Profesional</h2>
         {/* Filtros */}
         <div className="mb-4 w-full max-w-md flex space-x-4">
           <div className="flex-1">
@@ -688,7 +690,7 @@ const AdminHome = () => {
         <div className="overflow-y-auto max-h-96 bg-white shadow-md rounded-lg">
           <table className="min-w-full bg-white border">
             <thead>
-              <tr className="bg-red-200 text-center">
+              <tr className="bg-[rgba(107,189,108,0.8)] text-center text-white">
                 <th className="py-2 px-4 border-b">Profesional</th>
                 <th className="py-2 px-4 border-b">Fecha</th>
                 <th className="py-2 px-4 border-b">Hora</th>

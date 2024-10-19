@@ -154,47 +154,52 @@ const Informes = () => {
   };
 
   return (
-    <div className="flex-1 min-h-screen p-8 flex flex-col items-center">
+    <div className="flex-1 min-h-screen p-8 flex flex-col items-center"
+    style={{
+      backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+      backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+      backgroundPosition: 'center', // Centra la imagen
+      backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+    }}
+    >
       <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
         Generar Informe
       </h1>
 
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+      <div className="bg-[rgba(237,247,222,0.8)] p-6 rounded-lg shadow-md w-full max-w-md">
         {/* Fecha Inicio */}
         <div className="mb-4">
-          <label className="block text-lg font-medium text-gray-700">Fecha Inicio:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">Fecha Inicio:</label>
           <input
             type="text"
             value={fechaInicio}
             onChange={handleFechaInicioChange}
             placeholder="DD/MM/AAAA"
             maxLength="10"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
           />
         </div>
 
         {/* Fecha Fin */}
         <div className="mb-4">
-          <label className="block text-lg font-medium text-gray-700">Fecha Fin:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">Fecha Fin:</label>
           <input
             type="text"
             value={fechaFin}
             onChange={handleFechaFinChange}
             placeholder="DD/MM/AAAA"
             maxLength="10"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
           />
         </div>
 
         {/* Tipo de Informe */}
         <div className="mb-4">
-          <label className="block text-lg font-medium text-gray-700">Tipo de Informe:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">Tipo de Informe:</label>
           <select
             value={tipoInforme}
             onChange={(e) => setTipoInforme(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
           >
             <option value="ingresos">Ingresos por tipo de pago</option>
             <option value="servicios">Servicios realizados por profesional</option>
@@ -204,7 +209,7 @@ const Informes = () => {
         {/* Botón para Generar Informe */}
         <button
           onClick={handleGenerarInforme}
-          className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg"
+          className="w-full bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700"
         >
           Generar Informe
         </button>
@@ -216,7 +221,7 @@ const Informes = () => {
           <div className="mt-8 w-full max-w-md overflow-x-auto">
             <table className="min-w-full bg-white border">
               <thead>
-                <tr className="bg-gray-200">
+                <tr className="bg-[rgba(76,175,80,0.8)] text-white">
                   {tipoInforme === 'ingresos' ? (
                     <>
                       <th className="px-4 py-2">Método de Pago</th>
@@ -255,7 +260,7 @@ const Informes = () => {
           {/* Botón para Descargar Informe */}
           <button
             onClick={handleDescargarPDF}
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mt-2"
           >
             Descargar Informe
           </button>

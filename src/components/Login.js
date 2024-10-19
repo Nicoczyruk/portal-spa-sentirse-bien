@@ -62,8 +62,15 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-spa-verde-oscuro min-h-screen flex justify-center items-center">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+    <div className="bg-spa-verde-oscuro min-h-screen flex justify-center items-center"
+    style={{
+      backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+      backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+      backgroundPosition: 'center', // Centra la imagen
+      backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+    }}
+    >
+      <div className="bg-[rgba(237,247,222,0.8)] rounded-lg shadow-lg p-8 max-w-md mx-auto">
         <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Logo del Spa" className="w-34 h-24 mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-center mb-4">Iniciar Sesión</h2>
         <form onSubmit={handleLogin}>
@@ -90,7 +97,7 @@ const Login = () => {
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700"
           >
             Iniciar Sesión
           </button>

@@ -1,14 +1,22 @@
-// src/components/Sidebar.js
-
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
+import './sidebar.css';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { logout, user } = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(true);
+
+  // Estado inicial basado en el valor de localStorage
+  const [isOpen, setIsOpen] = useState(
+    () => localStorage.getItem('sidebarOpen') === 'true' // Recupera el estado desde localStorage
+  );
+
+  useEffect(() => {
+    // Guarda el estado en localStorage cada vez que cambie el estado del sidebar
+    localStorage.setItem('sidebarOpen', isOpen);
+  }, [isOpen]);
 
   const handleLogout = async () => {
     try {
@@ -36,7 +44,7 @@ const Sidebar = () => {
   if (path === '/perfil') currentPage = 'perfil';
   if (path === '/reservar-servicio') currentPage = 'reservar-servicio';
   if (path === '/historial-reservas') currentPage = 'historial-reservas';
-  if (path === '/pagos') currentPage = 'pagos'; 
+  if (path === '/pagos') currentPage = 'pagos';
   if (path === '/admin') currentPage = 'admin';
   if (path === '/informes') currentPage = 'informes';
   if (path === '/Empleado/pagos') currentPage = 'panel-Empleado';
@@ -47,7 +55,7 @@ const Sidebar = () => {
       {/* Botón de menú hamburguesa */}
       <button
         className="fixed top-4 left-4 p-2 bg-gray-800 text-white rounded hover:bg-blue-600 flex items-center z-50"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(!isOpen)} // Cambia el estado al hacer clic
       >
         <div className="flex flex-col space-y-1">
           <span className="block w-6 h-0.5 bg-white"></span>
@@ -58,7 +66,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`absolute top-0 left-0 h-screen bg-white text-gray-800 w-64 flex flex-col shadow-lg transform ${
+        className={`fixed top-0 left-0 h-screen bg-white text-gray-800 w-64 flex flex-col shadow-lg transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 z-40`}
       >
@@ -73,7 +81,6 @@ const Sidebar = () => {
         {/* Enlaces de navegación */}
         <nav className="flex-1 p-4 z-10 relative">
           <ul className="space-y-2">
-            {/* Enlace al panel admin solo si el usuario es admin */}
             {user && user.rol === 'admin' && (
               <li>
                 <Link
@@ -144,7 +151,6 @@ const Sidebar = () => {
               </li>
             )}
 
-            {/* Enlace a Pagos */}
             {currentPage !== 'pagos' && user.rol === 'Cliente' && (
               <li>
                 <Link
@@ -159,7 +165,6 @@ const Sidebar = () => {
               </li>
             )}
 
-            {/* Enlace a Informes */}
             {currentPage !== 'informes' && ['admin', 'Empleado'].includes(user.rol) && (
               <li>
                 <Link
@@ -174,37 +179,34 @@ const Sidebar = () => {
               </li>
             )}
 
-            {/* Nuevo botón: Panel Empleado */}
             {currentPage !== 'panelempleado' && ['admin', 'Empleado'].includes(user.rol) && (
-            <li>
-              <Link
-                to="/panelEmpleado"
-                className={`block p-2 hover:bg-gray-300 rounded ${
-                  currentPage === 'panel-Empleado' ? 'bg-gray-300' : ''
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                Panel Empleado
-              </Link>
-            </li>
+              <li>
+                <Link
+                  to="/panelEmpleado"
+                  className={`block p-2 hover:bg-gray-300 rounded ${
+                    currentPage === 'panel-Empleado' ? 'bg-gray-300' : ''
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Panel Empleado
+                </Link>
+              </li>
             )}
 
-            {/* Nuevo botón: Panel Profesional */}
             {currentPage !== 'panelprofesional' && user.rol === 'Profesional' && (
-            <li>
-              <Link
-                to="/panelprofesional"
-                className={`block p-2 hover:bg-gray-300 rounded ${
-                  currentPage === 'panel-profesional' ? 'bg-gray-300' : ''
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                Panel Profesional
-              </Link>
-            </li>
+              <li>
+                <Link
+                  to="/panelprofesional"
+                  className={`block p-2 hover:bg-gray-300 rounded ${
+                    currentPage === 'panel-profesional' ? 'bg-gray-300' : ''
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Panel Profesional
+                </Link>
+              </li>
             )}
 
-            {/* Botón de Cerrar Sesión */}
             <li>
               <button
                 onClick={() => {

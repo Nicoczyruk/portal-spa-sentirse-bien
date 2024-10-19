@@ -76,10 +76,10 @@ const Home = () => {
     <div
       className="flex-1 min-h-screen p-8 flex flex-col items-center"
       style={{
-        backgroundImage: 'url(./edicion7.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+        backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+        backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+        backgroundPosition: 'center', // Centra la imagen
+        backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
       }}
     >   
       <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
@@ -117,6 +117,77 @@ const Home = () => {
           )}
         </div>
       )}
+
+       {/* Apartado de Noticias */}
+<div className="bg-white rounded-lg shadow-lg p-6 mb-8 w-full">
+  <h2 className="text-2xl font-bold mb-4">Noticias del Mundo del Spa</h2>
+  
+  {/* Primera noticia */}
+  <div className="flex items-center gap-4 mb-8"> {/* Añadimos mb-8 para crear espacio entre noticias */}
+    <img
+      src="./spacerveza.png"
+      alt="Noticia Spa"
+      style={{ width: '200px', height: '150px', objectFit: 'cover' }}
+      className="rounded-lg"
+    />
+    <div>
+      <p className="mb-4">Los spa de cerveza que son tendencia en el mundo y sus posibles beneficios</p>
+      <a
+        href="https://www.eltiempo.com/cultura/gente/los-spa-de-cerveza-que-son-tendencia-en-el-mundo-y-sus-posibles-beneficios-843380"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 hover:underline"
+      >
+        Leer más
+      </a>
+    </div>
+  </div>
+
+  {/* Segunda noticia */}
+  <div className="flex items-center gap-4 mb-8"> {/* mb-8 también aquí para separación */}
+    <img
+      src="./spalujoso.jpeg"
+      alt="Noticia Spa"
+      style={{ width: '200px', height: '150px', objectFit: 'cover' }}
+      className="rounded-lg"
+    />
+    <div>
+      <p className="mb-4">Los ‘spas’ más lujosos del mundo para ir a descansar</p>
+      <a
+        href="https://www.eltiempo.com/vida/viajar/spas-de-lujo-en-europa-estados-unidos-y-asia-860638"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 hover:underline"
+      >
+        Leer más
+      </a>
+    </div>
+  </div>
+
+  {/* Tercera noticia */}
+  <div className="flex items-center gap-4"> {/* Sin mb-8 si no quieres más después */}
+    <img
+      src="./spaserpiente.jpeg"
+      alt="Noticia Spa"
+      style={{ width: '200px', height: '150px', objectFit: 'cover' }}
+      className="rounded-lg"
+    />
+    <div>
+      <p className="mb-4">¿Relajación? Escalofriantes masajes con serpientes causan polémica</p>
+      <a
+        href="https://www.eltiempo.com/cultura/gente/video-en-egipto-un-spa-ofrece-masajes-con-serpientes-557919"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 hover:underline"
+      >
+        Leer más
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
 
       {/* Tarjetas de servicios... */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">

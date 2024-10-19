@@ -33,13 +33,22 @@ const PanelEmpleado = () => {
   }, []);
 
   return (
-    <div className="panel-empleado">
-      <h1 className="title">Pagos Realizados Hoy</h1>
+    <div className="panel-empleado"
+    style={{
+      backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+      backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+      backgroundPosition: 'center', // Centra la imagen
+      backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+    }}
+    >
+      <h1 className="title">
+        Pagos realizados hoy
+      </h1>
       {error && <p className="error">{error}</p>}
 
       <table className="pagos-table">
         <thead>
-          <tr>
+          <tr className='text-center'>
             <th>ID Pago</th>
             <th>Cliente</th>
             <th>Método de Pago</th>

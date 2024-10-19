@@ -33,8 +33,17 @@ const PanelProfesional = () => {
   }, [selectedDate]);
 
   return (
-    <div className="panel-profesional flex-1 min-h-screen p-8 flex flex-col items-center bg-white">
-      <h1 className="text-3xl font-semibold mb-8">Panel Profesional</h1>
+    <div className="panel-profesional flex-1 min-h-screen p-8 flex flex-col items-center bg-white"
+    style={{
+      backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+      backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+      backgroundPosition: 'center', // Centra la imagen
+      backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+    }}
+    >
+      <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
+        Panel Profecional
+      </h1>
 
       <div className="mb-6">
         <label className="block mb-2 font-medium">Seleccionar Fecha:</label>

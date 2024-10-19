@@ -77,7 +77,7 @@
   }
   
   .bg-white {
-    background-color: white;
+    background-color: #E7F5D6;
   }
   
   .border {
@@ -89,11 +89,11 @@
   }
   
   .bg-blue-200 {
-    background-color: #bfdbfe;
+    background-color: #E7F5D6;
   }
   
   .hover\:bg-blue-50:hover {
-    background-color: #eff6ff;
+    background-color: #E7F5D6;
   }
   
   .py-2 {

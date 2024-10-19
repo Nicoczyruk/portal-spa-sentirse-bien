@@ -112,10 +112,10 @@ const Perfil = () => {
     <div
       className="flex-1 min-h-screen p-8 flex flex-col items-center"
       style={{
-        backgroundImage: 'url(./edicion7.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+        backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+        backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+        backgroundPosition: 'center', // Centra la imagen
+        backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
       }}
     >
       <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
@@ -124,7 +124,7 @@ const Perfil = () => {
       {error && <p className="error text-red-500 mb-4">{error}</p>}
       <div className="max-w-2xl w-full">
         {/* Tarjeta de Perfil */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+        <div className="bg-[rgba(237,247,222,0.8)] rounded-lg shadow-lg p-8 mb-8">
           {editando ? (
             <form onSubmit={handleGuardar}>
               <div>
@@ -179,14 +179,14 @@ const Perfil = () => {
               </div>
               <button
                 type="submit"
-                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500"
+                className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500"
               >
                 Guardar Cambios
               </button>
               <button
                 type="button"
                 onClick={() => setEditando(false)}
-                className="mt-4 ml-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-500"
+                className="mt-4 ml-4 px-4 py-2 bg-red-600 text-white p-2 rounded-full hover:bg-red-500"
               >
                 Cancelar
               </button>
@@ -216,7 +216,7 @@ const Perfil = () => {
         </div>
 
         {/* Tarjetas de Reservas */}
-        <div className="bg-white rounded-lg shadow-lg p-6 w-full">
+        <div className="bg-[rgba(237,247,222,0.8)] rounded-lg shadow-lg p-6 w-full">
           <h2 className="text-2xl font-bold mb-4">Historial de Reservas</h2>
           {reservas.length === 0 ? (
             <p>No hay reservas disponibles.</p>

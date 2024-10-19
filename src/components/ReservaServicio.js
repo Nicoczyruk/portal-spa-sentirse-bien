@@ -206,10 +206,10 @@ const ReservaServicio = () => {
       {/* Contenedor principal para la página de reserva */}
       <div className="flex-1 min-h-screen p-8 flex flex-col items-center"
         style={{
-          backgroundImage: 'url(./edicion7.png)', // Ruta de la imagen
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+          backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+          backgroundPosition: 'center', // Centra la imagen
+          backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
         }}
       > 
         <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
@@ -219,7 +219,7 @@ const ReservaServicio = () => {
         {error && <p className="text-red-500 mb-4">{error}</p>}
         {success && <p className="text-green-500 mb-4">{success}</p>}
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+        <form onSubmit={handleSubmit} className="bg-[rgba(237,247,222,0.8)] rounded-lg shadow-lg p-6 max-w-md w-full">
           {/* Selección de servicio */}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -283,7 +283,7 @@ const ReservaServicio = () => {
           {/* Botón de reserva */}
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full"
+            className="w-full bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700"
           >
             Reservar
           </button>

@@ -6,6 +6,14 @@
   background-color: rgba(237, 247, 222, 0.8);
 }
 */
+.panel-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
 
 /* Agrega una clase personalizada válida */
 .bg-custom-opacity {
@@ -60,9 +68,7 @@
 .bg-black {
     background-color: black;
 }
-.bg-opacity-50 {
-    background-opacity: 0.5; /* Elimina o reemplaza esta propiedad */
-}
+
 .bg-white {
     background-color: white;
 }

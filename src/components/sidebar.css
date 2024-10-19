@@ -1,0 +1,12 @@
+/* Asegúrate de agregar estas clases en tu archivo CSS o como clases en Tailwind */
+
+.sidebar {
+    position: fixed; /* Esto hace que el sidebar quede fijo */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Esto asegura que ocupe toda la altura de la pantalla */
+    width: 64px; /* O el tamaño que necesites */
+    z-index: 50; /* Para que se quede encima de otros elementos */
+    transition: transform 0.3s ease;
+}
+
