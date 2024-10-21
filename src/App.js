@@ -36,9 +36,8 @@ function App() {
                   <Route path="/register" element={<Register />} />
 
                   {/* Rutas protegidas */}
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/perfil" element={<Profile />} />
-                  {/* Ruta protegida para AdminHome */}
+                  <Route path="/home" element={<PrivateRoute element={Home} />} />
+                  <Route path="/perfil" element={<PrivateRoute element={Profile} />} />
                   <Route path="/admin" element={<PrivateRoute element={AdminHome} roles={['admin']} />} />
                   <Route path="/reservar-servicio" element={<PrivateRoute element={ReservaServicio} roles={['Cliente']} />} />
                   <Route path="/historial-reservas" element={<PrivateRoute element={HistorialReservas} roles={['Cliente']} />} />
