@@ -8,13 +8,11 @@ const Sidebar = () => {
   const location = useLocation();
   const { logout, user } = useContext(AuthContext);
 
-  // Estado inicial basado en el valor de localStorage
   const [isOpen, setIsOpen] = useState(
-    () => localStorage.getItem('sidebarOpen') === 'true' // Recupera el estado desde localStorage
+    () => localStorage.getItem('sidebarOpen') === 'true'
   );
 
   useEffect(() => {
-    // Guarda el estado en localStorage cada vez que cambie el estado del sidebar
     localStorage.setItem('sidebarOpen', isOpen);
   }, [isOpen]);
 
@@ -48,14 +46,13 @@ const Sidebar = () => {
   if (path === '/admin') currentPage = 'admin';
   if (path === '/informes') currentPage = 'informes';
   if (path === '/Empleado/pagos') currentPage = 'panel-Empleado';
-  if (path === '/panelProfesional') currentPage = 'panel-Profesional'; // Nueva ruta
+  if (path === '/panelProfesional') currentPage = 'panel-Profesional';
 
   return (
     <>
-      {/* Botón de menú hamburguesa */}
       <button
         className="fixed top-4 left-4 p-2 bg-gray-800 text-white rounded hover:bg-blue-600 flex items-center z-50"
-        onClick={() => setIsOpen(!isOpen)} // Cambia el estado al hacer clic
+        onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex flex-col space-y-1">
           <span className="block w-6 h-0.5 bg-white"></span>
@@ -64,21 +61,17 @@ const Sidebar = () => {
         </div>
       </button>
 
-      {/* Sidebar */}
       <div
         className={`fixed top-0 left-0 h-screen bg-white text-gray-800 w-64 flex flex-col shadow-lg transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 z-40`}
       >
-        {/* Fondo semi-transparente */}
         <div className="absolute inset-0 bg-[rgba(237,247,222,0.8)] bg-cover"></div>
 
-        {/* Título de la Sidebar */}
         <div className="p-4 text-center text-2xl font-bold z-10 relative border-b">
           Menú
         </div>
 
-        {/* Enlaces de navegación */}
         <nav className="flex-1 p-4 z-10 relative">
           <ul className="space-y-2">
             {user && user.rol === 'admin' && (
@@ -220,6 +213,20 @@ const Sidebar = () => {
             </li>
           </ul>
         </nav>
+
+        {/* Footer con los nombres del grupo */}
+        <div className="p-4 text-center text-gray-600 text-sm">
+          <span className="cursor-pointer group relative">
+            Created by Grupo 6
+            <div className="absolute hidden group-hover:block bg-white shadow-lg border rounded p-2 mt-2">
+              <ul className="text-gray-800">
+                <li>Giovanni Pellizari</li>
+                <li>Czyruk Nicolas</li>
+                <li>Aguirre Gonzalo</li>
+              </ul>
+            </div>
+          </span>
+        </div>
       </div>
     </>
   );

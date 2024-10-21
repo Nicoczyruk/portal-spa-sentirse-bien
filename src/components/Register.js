@@ -1,7 +1,5 @@
-// src/components/Register.js
-
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -49,18 +47,24 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-spa-verde-oscuro min-h-screen flex justify-center items-center"
-    style={{
-      backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
-      backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
-      backgroundPosition: 'center', // Centra la imagen
-      backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
-    }}
+    <div
+      className="bg-spa-verde-oscuro min-h-screen flex justify-center items-center"
+      style={{
+        backgroundImage: 'url(./verde3.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
     >
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
-        <img src={`${process.env.PUBLIC_URL}/logo.png`} alt="Logo del Spa" className="w-34 h-24 mx-auto mb-4" />
+        <img
+          src={`${process.env.PUBLIC_URL}/logo.png`}
+          alt="Logo del Spa"
+          className="w-34 h-24 mx-auto mb-4"
+        />
         <h2 className="text-2xl font-bold text-center mb-4">Registrarse</h2>
         <form onSubmit={handleSubmit}>
+          {/* Campos del formulario */}
           <div className="mb-4">
             <label className="block text-gray-700">Nombre:</label>
             <input
@@ -144,6 +148,14 @@ const Register = () => {
             Registrarse
           </button>
         </form>
+
+        {/* Texto de redirección al login */}
+        <p className="text-center mt-4 text-gray-700">
+          ¿Ya tienes una cuenta?{' '}
+          <Link to='/' className="text-blue-600 hover:underline">
+            Ingresa acá!
+          </Link>
+        </p>
       </div>
     </div>
   );
