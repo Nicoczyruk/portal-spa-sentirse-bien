@@ -43,6 +43,12 @@ const Informes = () => {
       return false;
     }
 
+    // Validar febrero (simplificado, sin años bisiestos)
+    if (mes === 2 && dia > 29) {
+      setError('Febrero tiene como máximo 29 días.');
+      return false;
+    }
+
     // Validar año (opcional, por ejemplo, no permitir años anteriores a 1900)
     if (año < 1900 || año > 2100) {
       setError('El año debe estar entre 1900 y 2100.');
@@ -101,7 +107,10 @@ const Informes = () => {
       return;
     }
 
-    const endpoint = tipoInforme === 'ingresos' ? '/api/informes/ingresos' : '/api/informes/servicios-profesional';
+    const endpoint =
+      tipoInforme === 'ingresos'
+        ? '/api/informes/ingresos'
+        : '/api/informes/servicios-profesional';
     const body = { fecha_inicio: fechaInicio, fecha_fin: fechaFin };
 
     try {
@@ -125,7 +134,10 @@ const Informes = () => {
   };
 
   const handleDescargarPDF = async () => {
-    const endpoint = tipoInforme === 'ingresos' ? '/api/informes/ingresos-pdf' : '/api/informes/servicios-profesional-pdf';
+    const endpoint =
+      tipoInforme === 'ingresos'
+        ? '/api/informes/ingresos-pdf'
+        : '/api/informes/servicios-profesional-pdf';
     const body = { fecha_inicio: fechaInicio, fecha_fin: fechaFin };
 
     try {
@@ -154,13 +166,14 @@ const Informes = () => {
   };
 
   return (
-    <div className="flex-1 min-h-screen p-8 flex flex-col items-center"
-    style={{
-      backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
-      backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
-      backgroundPosition: 'center', // Centra la imagen
-      backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
-    }}
+    <div
+      className="flex-1 min-h-screen p-8 flex flex-col items-center"
+      style={{
+        backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
+        backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
+        backgroundPosition: 'center', // Centra la imagen
+        backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+      }}
     >
       <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
         Generar Informe
@@ -169,7 +182,9 @@ const Informes = () => {
       <div className="bg-[rgba(237,247,222,0.8)] p-6 rounded-lg shadow-md w-full max-w-md">
         {/* Fecha Inicio */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Fecha Inicio:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Fecha Inicio:
+          </label>
           <input
             type="text"
             value={fechaInicio}
@@ -182,7 +197,9 @@ const Informes = () => {
 
         {/* Fecha Fin */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Fecha Fin:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Fecha Fin:
+          </label>
           <input
             type="text"
             value={fechaFin}
@@ -195,7 +212,9 @@ const Informes = () => {
 
         {/* Tipo de Informe */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Tipo de Informe:</label>
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Tipo de Informe:
+          </label>
           <select
             value={tipoInforme}
             onChange={(e) => setTipoInforme(e.target.value)}
@@ -215,17 +234,27 @@ const Informes = () => {
         </button>
       </div>
 
+      {/* Mostrar error si existe */}
+      {error && (
+        <div className="mt-4 text-red-500">
+          <p>{error}</p>
+        </div>
+      )}
+
       {/* Tabla de Resultados */}
       {resultados.length > 0 && (
         <>
-          <div className="mt-8 w-full max-w-md overflow-x-auto">
+          <div className="mt-8 w-full max-w-4xl overflow-x-auto">
             <table className="min-w-full bg-white border">
               <thead>
                 <tr className="bg-[rgba(76,175,80,0.8)] text-white">
                   {tipoInforme === 'ingresos' ? (
                     <>
+                      <th className="px-4 py-2">Cliente</th>
+                      <th className="px-4 py-2">Servicio</th>
                       <th className="px-4 py-2">Método de Pago</th>
-                      <th className="px-4 py-2">Total Ingresos</th>
+                      <th className="px-4 py-2">Monto</th>
+                      <th className="px-4 py-2">Fecha de Pago</th>
                     </>
                   ) : (
                     <>
@@ -241,12 +270,17 @@ const Informes = () => {
                   <tr key={index} className="border-t">
                     {tipoInforme === 'ingresos' ? (
                       <>
+                        <td className="px-4 py-2">{row.cliente}</td>
+                        <td className="px-4 py-2">{row.servicio}</td>
                         <td className="px-4 py-2">{row.metodo_pago}</td>
-                        <td className="px-4 py-2">${row.total}</td>
+                        <td className="px-4 py-2">${row.monto}</td>
+                        <td className="px-4 py-2">{row.fecha_pago}</td>
                       </>
                     ) : (
                       <>
-                        <td className="px-4 py-2">{row.nombre} {row.apellido}</td>
+                        <td className="px-4 py-2">
+                          {row.nombre} {row.apellido}
+                        </td>
                         <td className="px-4 py-2">{row.servicio}</td>
                         <td className="px-4 py-2">{row.total_servicios}</td>
                       </>

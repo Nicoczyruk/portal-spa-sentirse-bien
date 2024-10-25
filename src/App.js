@@ -16,7 +16,7 @@ import Pagos from './components/Pagos';
 import Informes from './components/Informes'; 
 import PanelEmpleado from './components/PanelEmpleado';
 import PanelProfesional from './components/PanelProfesional';
-
+import ModificarReserva from './components/ModificarReserva';
 
 function App() {
   return (
@@ -45,6 +45,7 @@ function App() {
                   <Route path="/informes" element={<PrivateRoute element={Informes} roles={['admin', 'Empleado']} />} />
                   <Route path="/panelempleado" element={<PrivateRoute element={PanelEmpleado} roles={['admin', 'Empleado']} />} />
                   <Route path="/panelprofesional" element={<PrivateRoute element={PanelProfesional} roles={['Profesional']} />} />
+                  <Route path="/modificar-reserva/:id_turno" element={<ModificarReserva />} />
                 </Routes>
               </div>
             </div>
