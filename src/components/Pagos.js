@@ -180,7 +180,7 @@ const Pagos = () => {
 
   return (
     <div className="flex">
-      <div className="flex-1 min-h-screen p-8 flex flex-col items-center bg-gray-50"
+      <div className="flex-1 min-h-screen p-8 flex flex-col items-center"
       style={{
         backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
         backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
@@ -280,16 +280,21 @@ const Pagos = () => {
                 <label className="block">
                   <span className="text-gray-700">Número de tarjeta</span>
                   <input
-                  type="text"
-                  value={tarjeta.numero}
-                  onChange={(e) => setTarjeta({ ...tarjeta, numero: e.target.value.replace(/[^0-9]/g, '') })} // Elimina cualquier letra ingresada
-                  className="w-full p-2 mb-2 border rounded"
-                placeholder="1234 5678 9012 3456"
-                maxLength="19" // 16 dígitos + 3 espacios opcionales
-                inputMode="numeric" // Muestra el teclado numérico en dispositivos móviles
-                pattern="\d*" // Restringe a números solamente
-                />
-              </label>
+                    type="text"
+                    value={tarjeta.numero}
+                    onChange={(e) => {
+                    const valor = e.target.value.replace(/\D/g, ''); // Solo números
+                    const formateado = valor.replace(/(\d{4})(?=\d)/g, '$1 '); // Inserta espacio cada 4 dígitos
+                    setTarjeta({ ...tarjeta, numero: formateado });
+                    }}
+                    className="w-full p-2 mb-2 border rounded"
+                    placeholder="1234 5678 9012 3456"
+                    maxLength="19" // 16 dígitos + 3 espacios
+                    inputMode="numeric"
+                    pattern="\d*"
+                  />
+                </label>
+
 
                 <label className="block">
                   <span className="text-gray-700">Nombre en la tarjeta</span>
