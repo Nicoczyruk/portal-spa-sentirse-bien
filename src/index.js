@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-// Import the register function from serviceWorkerRegistration
-import { register } from './serviceWorkerRegistration';
+import { register } from './serviceWorkerRegistration';  // Registrar el SW
 
 // Import reportWebVitals (optional)
 import reportWebVitals from './reportWebVitals';
