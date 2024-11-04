@@ -1,6 +1,8 @@
+// Sidebar.js
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
+import InstallPromptModal from './InstallPromptModal';
 import './sidebar.css';
 
 const Sidebar = () => {
@@ -16,6 +18,10 @@ const Sidebar = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isInstallAvailable, setIsInstallAvailable] = useState(false);
+
+  // Estados adicionales para el modal y detección de iOS
+  const [showInstallModal, setShowInstallModal] = useState(false);
+  const [isIos, setIsIos] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('sidebarOpen', isOpen);
@@ -35,6 +41,11 @@ const Sidebar = () => {
     };
 
     setIsMobile(checkIfMobile());
+
+    // Detectar si el dispositivo es iOS
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+      setIsIos(true);
+    }
 
     // Escuchar el evento beforeinstallprompt
     const handler = (e) => {
@@ -67,7 +78,8 @@ const Sidebar = () => {
       setDeferredPrompt(null);
       setIsInstallAvailable(false); // Opcional: Ocultar el botón después de la acción
     } else {
-      alert('La opción de instalación no está disponible en este momento');
+      // Mostrar el modal con instrucciones personalizadas
+      setShowInstallModal(true);
     }
   };
 
@@ -213,33 +225,35 @@ const Sidebar = () => {
               </li>
             )}
 
-            {currentPage !== 'informes' && ['admin', 'Empleado'].includes(user.rol) && (
-              <li>
-                <Link
-                  to="/informes"
-                  className={`block p-2 hover:bg-gray-300 rounded ${
-                    currentPage === 'informes' ? 'bg-gray-300' : ''
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Informes
-                </Link>
-              </li>
-            )}
+            {currentPage !== 'informes' &&
+              ['admin', 'Empleado'].includes(user.rol) && (
+                <li>
+                  <Link
+                    to="/informes"
+                    className={`block p-2 hover:bg-gray-300 rounded ${
+                      currentPage === 'informes' ? 'bg-gray-300' : ''
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Informes
+                  </Link>
+                </li>
+              )}
 
-            {currentPage !== 'panelempleado' && ['admin', 'Empleado'].includes(user.rol) && (
-              <li>
-                <Link
-                  to="/panelEmpleado"
-                  className={`block p-2 hover:bg-gray-300 rounded ${
-                    currentPage === 'panel-Empleado' ? 'bg-gray-300' : ''
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Panel Empleado
-                </Link>
-              </li>
-            )}
+            {currentPage !== 'panelempleado' &&
+              ['admin', 'Empleado'].includes(user.rol) && (
+                <li>
+                  <Link
+                    to="/panelEmpleado"
+                    className={`block p-2 hover:bg-gray-300 rounded ${
+                      currentPage === 'panel-Empleado' ? 'bg-gray-300' : ''
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Panel Empleado
+                  </Link>
+                </li>
+              )}
 
             {currentPage !== 'panelprofesional' && user.rol === 'Profesional' && (
               <li>
@@ -293,6 +307,13 @@ const Sidebar = () => {
           </span>
         </div>
       </div>
+
+      {/* Modal de instalación */}
+      <InstallPromptModal
+        isOpen={showInstallModal}
+        onClose={() => setShowInstallModal(false)}
+        isIos={isIos}
+      />
     </>
   );
 };
