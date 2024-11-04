@@ -256,16 +256,14 @@ const Sidebar = () => {
             )}
 
             {/* Botón para instalar la PWA */}
-            {isInstallAvailable && (
-              <li>
-                <button
-                  onClick={handleInstallClick}
-                  className={`block p-2 hover:bg-gray-300 rounded w-full text-left`}
-                >
-                  Instala nuestra app móvil
-                </button>
-              </li>
-            )}
+            <li>
+              <button
+                onClick={handleInstallClick}
+                className={`block p-2 hover:bg-gray-300 rounded w-full text-left`}
+              >
+                Instala nuestra app móvil
+              </button>
+            </li>
 
             <li>
               <button
