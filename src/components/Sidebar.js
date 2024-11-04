@@ -12,9 +12,61 @@ const Sidebar = () => {
     () => localStorage.getItem('sidebarOpen') === 'true'
   );
 
+  // Estado para almacenar el evento beforeinstallprompt
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     localStorage.setItem('sidebarOpen', isOpen);
   }, [isOpen]);
+
+  useEffect(() => {
+    // Detectar si el dispositivo es móvil
+    const checkIfMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      if (/android/i.test(userAgent)) {
+        return true;
+      }
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        return true;
+      }
+      return false;
+    };
+
+    setIsMobile(checkIfMobile());
+
+    // Escuchar el evento beforeinstallprompt
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener('beforeinstallprompt', handler);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!isMobile) {
+      alert('No está en un dispositivo móvil');
+      return;
+    }
+
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('Usuario aceptó la instalación');
+      } else {
+        console.log('Usuario rechazó la instalación');
+      }
+      setDeferredPrompt(null);
+    } else {
+      alert('La opción de instalación no está disponible en este momento');
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -199,6 +251,16 @@ const Sidebar = () => {
                 </Link>
               </li>
             )}
+
+            {/* Botón para instalar la PWA */}
+            <li>
+              <button
+                onClick={handleInstallClick}
+                className="mt-4 w-full bg-blue-600 text-white p-2 rounded-full hover:bg-blue-500"
+              >
+                Instala nuestra app móvil
+              </button>
+            </li>
 
             <li>
               <button
