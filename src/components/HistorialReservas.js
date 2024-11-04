@@ -64,7 +64,6 @@ const HistorialReservas = () => {
 
   // Función para modificar una reserva
   const modificarReserva = (id_turno) => {
-    // Redirigir a una página o mostrar un modal para modificar la reserva
     navigate(`/modificar-reserva/${id_turno}`);
   };
 
@@ -74,10 +73,10 @@ const HistorialReservas = () => {
       <div
         className="flex-1 min-h-screen p-8 flex flex-col items-center"
         style={{
-          backgroundImage: 'url(./verde3.png)', // Ruta de la imagen
-          backgroundSize: 'cover', // Ajusta la imagen para que cubra todo el fondo
-          backgroundPosition: 'center', // Centra la imagen
-          backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+          backgroundImage: 'url(./verde3.png)', 
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       >
         <h1 className="text-4xl font-semibold text-center text-black mb-8 p-4 shadow-lg rounded-full bg-[rgba(237,247,222,0.8)]">
@@ -89,15 +88,13 @@ const HistorialReservas = () => {
 
         {/* Advertencia de cancelación */}
         <div className="flex items-center bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 w-full max-w-4xl">
-          <div className="mr-2">
-            {/* Ícono de advertencia */}
-          </div>
           <p className="text-sm">
             Recuerda que tus reservas serán <b>canceladas</b> automáticamente si no se pagan al menos 48 horas antes del turno.
           </p>
         </div>
 
-        <div className="overflow-x-auto bg-[rgba(237,247,222,0.8)] shadow-md rounded-lg">
+        {/* Vista de tabla para pantallas grandes */}
+        <div className="overflow-x-auto bg-[rgba(237,247,222,0.8)] shadow-md rounded-lg hidden sm:block">
           <table className="min-w-full bg-[rgba(237,247,222,0.8)] border">
             <thead>
               <tr className="bg-[rgba(76,175,80,0.8)] text-center">
@@ -145,6 +142,39 @@ const HistorialReservas = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Vista de tarjetas para dispositivos móviles */}
+        <div className="flex flex-col gap-4 w-full sm:hidden">
+          {reservas.length > 0 ? (
+            reservas.map((reserva) => (
+              <div key={reserva.id_turno} className="bg-white p-4 rounded-lg shadow-md">
+                <p><strong>Servicio:</strong> {reserva.servicio}</p>
+                <p><strong>Fecha:</strong> {reserva.fecha}</p>
+                <p><strong>Hora:</strong> {reserva.hora}</p>
+                <p><strong>Estado:</strong> {reserva.estado}</p>
+                <p><strong>Pago:</strong> {reserva.pago}</p>
+                <div className="flex mt-2 space-x-2">
+                  <button
+                    onClick={() => modificarReserva(reserva.id_turno)}
+                    className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ${reserva.estado === 'Realizado' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={reserva.estado === 'Realizado' || reserva.pago !== 'Pendiente'}
+                  >
+                    Modificar
+                  </button>
+                  <button
+                    onClick={() => cancelarReserva(reserva.id_turno)}
+                    className={`bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded ${reserva.estado === 'Realizado' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={reserva.estado === 'Realizado'}
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No tienes reservas.</p>
+          )}
         </div>
       </div>
     </div>
