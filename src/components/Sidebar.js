@@ -15,6 +15,7 @@ const Sidebar = () => {
   // Estado para almacenar el evento beforeinstallprompt
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isInstallAvailable, setIsInstallAvailable] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('sidebarOpen', isOpen);
@@ -39,6 +40,7 @@ const Sidebar = () => {
     const handler = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
+      setIsInstallAvailable(true); // Indica que la opción de instalación está disponible
     };
 
     window.addEventListener('beforeinstallprompt', handler);
@@ -63,6 +65,7 @@ const Sidebar = () => {
         console.log('Usuario rechazó la instalación');
       }
       setDeferredPrompt(null);
+      setIsInstallAvailable(false); // Opcional: Ocultar el botón después de la acción
     } else {
       alert('La opción de instalación no está disponible en este momento');
     }
@@ -253,14 +256,16 @@ const Sidebar = () => {
             )}
 
             {/* Botón para instalar la PWA */}
-            <li>
-              <button
-                onClick={handleInstallClick}
-                className="mt-4 w-full bg-blue-600 text-white p-2 rounded-full hover:bg-blue-500"
-              >
-                Instala nuestra app móvil
-              </button>
-            </li>
+            {isInstallAvailable && (
+              <li>
+                <button
+                  onClick={handleInstallClick}
+                  className={`block p-2 hover:bg-gray-300 rounded w-full text-left`}
+                >
+                  Instala nuestra app móvil
+                </button>
+              </li>
+            )}
 
             <li>
               <button
