@@ -4,7 +4,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 
-
 const ReservaServicio = () => {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useContext(AuthContext);
@@ -41,6 +40,10 @@ const ReservaServicio = () => {
   const [availableTimes, setAvailableTimes] = useState([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [showDiscountPrompt, setShowDiscountPrompt] = useState(false);
+
+  // Verificar si el dispositivo es móvil usando el tamaño de la pantalla
+  const isMobile = window.innerWidth <= 768;
 
   // Generar los turnos cada 30 minutos de 8 AM a 8 PM
   const generateTimeSlots = () => {
@@ -185,8 +188,12 @@ const ReservaServicio = () => {
         setSelectedDate('');
         setSelectedTime('');
         setServicioSeleccionado('');
-        // Redirigir al historial de reservas
-        navigate('/historial-reservas');
+        // Mostrar el mensaje de descuento flash solo en dispositivos móviles
+        if (isMobile) {
+          setShowDiscountPrompt(true);
+        } else {
+          navigate('/historial-reservas');
+        }
       } else if (response.status === 401) {
         navigate('/login');
       } else {
@@ -197,6 +204,16 @@ const ReservaServicio = () => {
       setError('Error al conectar con el servidor.');
       setSuccess('');
     }
+  };
+
+  const handleAceptarDescuento = () => {
+    // Redirigir a la vista de pagos con el descuento aplicado
+    navigate('/pagos', { state: { applyDiscount: true } });
+  };
+
+  const handleRechazarDescuento = () => {
+    setShowDiscountPrompt(false);
+    navigate('/historial-reservas'); // Redirigir al historial de reservas si el usuario rechaza
   };
 
   return (
@@ -288,6 +305,27 @@ const ReservaServicio = () => {
             Reservar
           </button>
         </form>
+
+        {/* Modal de descuento flash */}
+        {showDiscountPrompt && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm">
+              <p className="text-lg font-semibold mb-4">¡Si pagas tu reserva ahora, obtendrás un 10% de descuento! ¿Quieres ir al pago?</p>
+              <button 
+                onClick={handleAceptarDescuento} 
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+              >
+                Sí, pagar con descuento
+              </button>
+              <button 
+                onClick={handleRechazarDescuento} 
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              >
+                No, gracias
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
